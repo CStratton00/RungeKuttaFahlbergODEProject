@@ -106,12 +106,12 @@ for i in range((int)(n * h) + 1):                                   # for loop t
 print("\nAverage Error Percent:", error/((int)(n * h) + 1), "\n")     # print the total error divided by the total number of x values
 
 # graphing error
-plt.title("Error Analysis")
-plt.xlabel("xn")
-plt.ylabel("error")
-plt.plot(errorSpace, errorRange, label = "Error over Xn")
-plt.legend()
-plt.show()
+plt.title("Error Analysis")                                     # set the title of the graph
+plt.xlabel("xn")                                                # set the x label on the graph
+plt.ylabel("error")                                             # set the y label on the graph
+plt.plot(errorSpace, errorRange, label = "Error over Xn")       # create the line and label it
+plt.legend()                                                    # shows the legend on the graph
+plt.show()                                                      # displays the graph
 
 # graphing both functions
 plt.title("Runge-Kutta and ODE Function Analysis")          # set the title of the graph
