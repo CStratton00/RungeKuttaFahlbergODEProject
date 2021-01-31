@@ -55,6 +55,14 @@ yso = odeint(dy_dx, y, xso)                     # y-space ODEint useing the odei
 teo = time.time()                               # time end fore ODEint function solution
 tto = teo - tso                                 # total time the ODEint function to solve
 
+# graphing ODEint
+plt.title("ODE Function Analysis")          # set the title of the graph
+plt.xlabel("x")                                             # set the x label on the graph
+plt.ylabel("y")                                             # set the y label on the graph
+plt.plot(xso, yso, 'r-', label = "ODEint", linewidth = 2)   # set the ODE line to be red and label it
+plt.legend()                                                # shows the legend on the graph
+plt.show()                                                  # displays the graph
+
 # Runge-Kutta solution and time analysis
 tsr = time.time()                               # time start for runge-kutta function solution
 
@@ -69,6 +77,18 @@ ttr = ter - tsr                                 # total time the runge-kutta fun
 
 td = ttr - tto                                  # time difference between ODEint and runge-kutta function
 
+# graphing runge-kutta
+plt.title("Runge-Kutta Function Analysis")          # set the title of the graph
+plt.xlabel("x")                                             # set the x label on the graph
+plt.ylabel("y")                                             # set the y label on the graph
+plt.plot(xsr, ysr, 'b-', label = "Runge Kutta")             # set the runge-kutta to be blue and label it
+plt.legend()                                                # shows the legend on the graph
+plt.show()                                                  # displays the graph
+
+# solutions
+print("\nODEint Solution:            ", yso[-1])    # ODEint function solution
+print("Runge-Kutta Solution:        ", ysr[-1])     # Runge-Kutta function solution
+
 # Print statement for time difference
 print("\nODEint Time:         ", tto)               # print the ODEint time
 print("Runge Kutta Time:    ", ttr)                 # print the runge-kutta time
@@ -76,13 +96,24 @@ print("ODEint is ", td, " seconds faster\n\n")      # print the difference betwe
 
 # error calculation
 error = 0                                                           # initial error value of 0
+errorRange = []                                                     # array to store error over xn
+errorSpace = np.linspace(1, (int)(n * h) + 1, 41)                   # error space for error analysis
 for i in range((int)(n * h) + 1):                                   # for loop to run through every x values
     error += (np.abs(ysr[i] - yso[i])/yso[i]) * 100                 # sum all the error values using the percentage error formula
+    errorRange.append((np.abs(ysr[i] - yso[i])/yso[i]) * 100)
     print("Percent Error at x =", i, ":", (np.abs(ysr[i] - yso[i])/yso[i]) * 100)   # print error at each x value
 
-print("\nTotal Error Percent:", error/((int)(n * h) + 1), "\n")     # print the total error divided by the total number of x values
+print("\nAverage Error Percent:", error/((int)(n * h) + 1), "\n")     # print the total error divided by the total number of x values
 
-# graphing functions
+# graphing error
+plt.title("Error Analysis")
+plt.xlabel("xn")
+plt.ylabel("error")
+plt.plot(errorSpace, errorRange, label = "Error over Xn")
+plt.legend()
+plt.show()
+
+# graphing both functions
 plt.title("Runge-Kutta and ODE Function Analysis")          # set the title of the graph
 plt.xlabel("x")                                             # set the x label on the graph
 plt.ylabel("y")                                             # set the y label on the graph
